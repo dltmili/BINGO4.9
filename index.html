@@ -6,88 +6,105 @@
 <title>BINGO CRBV</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --azul:#0C2C84; --amarillo:#FFD600; --rojo:#e53935; --verde:#4caf50; }
+  :root { --azul:#0A2374; --azul-card:#143296; --amarillo:#FFD600; --rojo:#e53935; --verde:#4caf50; }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   body{font-family:'Barlow Condensed',sans-serif;background:var(--azul);min-height:100vh;color:white;}
 
   /* HEADER */
-  header{background:var(--azul);border-bottom:3px solid var(--amarillo);display:flex;align-items:center;justify-content:center;gap:12px;padding:8px 16px;position:relative;}
-  .hesc{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid var(--amarillo);flex-shrink:0;}
+  header{background:var(--azul);border-bottom:3px solid var(--amarillo);display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 16px;position:relative;}
+  .hesc{width:54px;height:54px;border-radius:50%;overflow:hidden;border:2px solid var(--amarillo);flex-shrink:0;background:#000;}
   .hesc img{width:100%;height:100%;object-fit:cover;}
-  header h1{font-family:'Bebas Neue',sans-serif;color:var(--amarillo);font-size:2rem;letter-spacing:4px;}
+  header h1{font-family:'Bebas Neue',sans-serif;color:var(--amarillo);font-size:2.8rem;letter-spacing:4px;}
   
-  .badge-role{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:rgba(255,214,0,0.15);border:1px solid rgba(255,214,0,0.4);border-radius:20px;padding:3px 10px;font-size:11px;letter-spacing:1px;color:var(--amarillo);text-transform:uppercase;cursor:pointer;}
+  .badge-role{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:rgba(255,214,0,0.15);border:1px solid rgba(255,214,0,0.4);border-radius:20px;padding:4px 12px;font-size:12px;letter-spacing:1px;color:var(--amarillo);text-transform:uppercase;cursor:pointer;}
   .badge-role.admin{background:rgba(76,175,80,0.2);border-color:var(--verde);color:#81c784;}
 
   /* SALA Y CONEXION */
-  .sala-bar{background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;gap:8px;padding:7px 12px;border-bottom:1px solid rgba(255,214,0,0.2);flex-wrap:wrap;}
-  .sala-bar label{color:rgba(255,255,255,0.6);font-size:12px;}
-  .sala-bar input{background:rgba(255,255,255,0.1);border:1px solid rgba(255,214,0,0.4);border-radius:6px;color:white;padding:5px 10px;font-family:'Barlow Condensed',sans-serif;font-size:13px;width:130px;outline:none;}
+  .sala-bar{background:rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-bottom:1px solid rgba(255,214,0,0.2);flex-wrap:wrap;}
+  .sala-bar label{color:rgba(255,255,255,0.7);font-size:13px;}
+  .sala-bar input{background:rgba(255,255,255,0.1);border:1px solid rgba(255,214,0,0.4);border-radius:6px;color:white;padding:5px 10px;font-family:'Barlow Condensed',sans-serif;font-size:14px;width:130px;outline:none;}
   .sala-bar input:focus{border-color:var(--amarillo);}
-  .btn-action{background:var(--amarillo);color:var(--azul);border:none;border-radius:6px;padding:5px 12px;font-family:'Bebas Neue',sans-serif;font-size:15px;cursor:pointer;}
+  .btn-action{background:var(--amarillo);color:var(--azul);border:none;border-radius:6px;padding:6px 14px;font-family:'Bebas Neue',sans-serif;font-size:16px;cursor:pointer;}
   .btn-admin-login{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);}
 
-  /* CONTENIDO PRINCIPAL */
-  .contenido{padding:10px;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:600px;margin:0 auto;}
+  /* ESTRUCTURA PRINCIPAL DE 3 COLUMNAS (SPONSOR - JUEGO - SPONSOR) */
+  .layout-main{display:flex;justify-content:center;align-items:flex-start;gap:20px;max-width:1400px;margin:0 auto;padding:15px;}
+  
+  .sponsor-side{width:220px;flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .sponsor-title{font-size:12px;letter-spacing:2px;color:rgba(255,214,0,0.6);text-transform:uppercase;text-align:center;}
+  .sponsor-box{width:100%;background:rgba(0,0,0,0.25);border:2px solid var(--amarillo);border-radius:16px;padding:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:260px;}
+  .sponsor-img{width:100%;max-width:180px;height:auto;border-radius:12px;object-fit:contain;}
+
+  .contenido{flex:1;max-width:850px;display:flex;flex-direction:column;align-items:center;gap:12px;}
 
   .conn-estado{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(255,255,255,0.5);width:100%;justify-content:center;}
-  .sdot{width:7px;height:7px;border-radius:50%;background:var(--rojo);flex-shrink:0;}
+  .sdot{width:8px;height:8px;border-radius:50%;background:var(--rojo);flex-shrink:0;}
   .sdot.on{background:var(--verde);animation:bl 1.6s infinite;}
   @keyframes bl{0%,100%{opacity:1}50%{opacity:0.3}}
 
   /* NUMERO PRINCIPAL */
-  .num-wrap{text-align:center;padding:4px 0;}
-  .ultimo-label{font-size:11px;letter-spacing:3px;color:rgba(255,214,0,0.6);text-transform:uppercase;}
-  #numero-grande{font-family:'Bebas Neue',sans-serif;font-size:95px;line-height:1;color:var(--amarillo);text-shadow:0 0 30px rgba(255,214,0,0.3);}
+  .num-wrap{text-align:center;padding:2px 0;}
+  .ultimo-label{font-size:12px;letter-spacing:3px;color:rgba(255,214,0,0.7);text-transform:uppercase;}
+  #numero-grande{font-family:'Bebas Neue',sans-serif;font-size:110px;line-height:1;color:var(--amarillo);text-shadow:0 0 35px rgba(255,214,0,0.4);}
   #numero-grande.pop{animation:np 0.3s ease-out;}
   @keyframes np{0%{transform:scale(1.3);opacity:0.5}100%{transform:scale(1);opacity:1}}
-  .conteo{font-size:13px;color:rgba(255,255,255,0.4);}
+  .conteo{font-size:14px;color:rgba(255,255,255,0.5);}
 
   /* HISTORIAL */
   .hist-wrap{width:100%;}
-  .hist-label{font-size:10px;letter-spacing:2px;color:rgba(255,214,0,0.5);text-transform:uppercase;margin-bottom:4px;}
-  .historial{display:flex;gap:5px;align-items:center;background:rgba(0,0,0,0.25);border:1px solid rgba(255,214,0,0.2);border-radius:10px;padding:6px 10px;min-height:46px;flex-wrap:wrap;width:100%;}
-  .hball{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:16px;flex-shrink:0;}
+  .hist-label{font-size:11px;letter-spacing:2px;color:rgba(255,214,0,0.6);text-transform:uppercase;margin-bottom:4px;}
+  .historial{display:flex;gap:6px;align-items:center;background:rgba(0,0,0,0.3);border:1px solid rgba(255,214,0,0.25);border-radius:10px;padding:8px 12px;min-height:48px;flex-wrap:wrap;width:100%;}
+  .hball{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;flex-shrink:0;}
   .hball.nuevo{background:var(--amarillo);color:var(--azul);animation:bp 0.4s ease-out;}
   @keyframes bp{0%{transform:scale(0);opacity:0}60%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
-  .hball.viejo{background:rgba(255,214,0,0.2);color:rgba(255,214,0,0.65);}
-  .hist-empty{font-size:12px;color:rgba(255,255,255,0.25);}
+  .hball.viejo{background:rgba(255,214,0,0.2);color:rgba(255,214,0,0.7);}
+  .hist-empty{font-size:13px;color:rgba(255,255,255,0.3);}
 
   /* PANEL DE CONTROL DE ADMIN */
-  .admin-panel{display:none;width:100%;background:rgba(0,0,0,0.2);border:1px dashed rgba(255,214,0,0.4);border-radius:10px;padding:10px;margin-bottom:5px;}
+  .admin-panel{display:none;width:100%;background:rgba(0,0,0,0.25);border:1px dashed rgba(255,214,0,0.5);border-radius:10px;padding:10px;}
   .admin-panel.active{display:block;}
-  .admin-title{font-size:11px;color:var(--verde);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;text-align:center;}
-  .admin-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;}
-  .btn-reset{background:var(--rojo);color:white;border:none;border-radius:6px;padding:6px 12px;font-family:'Bebas Neue',sans-serif;font-size:15px;cursor:pointer;}
-  .btn-del{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:6px 12px;font-family:'Bebas Neue',sans-serif;font-size:15px;cursor:pointer;}
+  .admin-title{font-size:12px;color:var(--verde);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;text-align:center;}
+  .admin-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .btn-reset{background:var(--rojo);color:white;border:none;border-radius:6px;padding:8px 16px;font-family:'Bebas Neue',sans-serif;font-size:16px;cursor:pointer;}
+  .btn-del{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3);border-radius:6px;padding:8px 16px;font-family:'Bebas Neue',sans-serif;font-size:16px;cursor:pointer;}
 
-  /* CHECKBOXES LINEAS Y BINGO */
-  .opciones{display:flex;gap:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,214,0,0.15);border-radius:10px;padding:8px 14px;flex-wrap:wrap;justify-content:center;width:100%;}
-  .opciones label{display:flex;align-items:center;gap:5px;color:rgba(255,255,255,0.85);font-size:14px;font-weight:600;}
-  .opciones input[type="checkbox"]{width:16px;height:16px;accent-color:var(--amarillo);}
+  /* CHECKBOXES LINEAS Y BINGO (3 LINEAS + 2 BINGOS) */
+  .opciones{display:flex;gap:12px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,214,0,0.25);border-radius:12px;padding:10px 16px;flex-wrap:wrap;justify-content:center;width:100%;}
+  .opciones label{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.9);font-size:15px;font-weight:700;}
+  .opciones input[type="checkbox"]{width:18px;height:18px;accent-color:var(--amarillo);cursor:pointer;}
   body:not(.is-admin) .opciones label{pointer-events:none;}
   body:not(.is-admin) .opciones input{pointer-events:none;}
 
   /* TABLERO */
-  .tablero{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;width:100%;}
-  .numero{aspect-ratio:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:17px;color:rgba(255,255,255,0.6);user-select:none;}
+  .tablero{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;width:100%;}
+  .numero{aspect-ratio:1;background:var(--azul-card);border:1px solid rgba(255,255,255,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:rgba(255,255,255,0.7);user-select:none;}
   body.is-admin .numero{cursor:pointer;}
   body:not(.is-admin) .numero{pointer-events:none;}
   .numero.marcado{background:var(--amarillo);color:var(--azul);border-color:var(--amarillo);font-weight:700;}
-  .numero.reciente{box-shadow:0 0 0 2px white,0 0 12px rgba(255,214,0,0.5);}
+  .numero.reciente{box-shadow:0 0 0 3px white,0 0 15px rgba(255,214,0,0.6);}
 
-  #offline-msg{display:none;background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.4);border-radius:10px;padding:8px 12px;font-size:12px;color:rgba(255,180,180,0.9);text-align:center;width:100%;}
+  #offline-msg{display:none;background:rgba(229,57,53,0.15);border:1px solid rgba(229,57,53,0.4);border-radius:10px;padding:8px 12px;font-size:13px;color:rgba(255,180,180,0.9);text-align:center;width:100%;}
   #offline-msg.show{display:block;}
 
-  #toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.88);color:white;padding:8px 18px;border-radius:20px;font-size:13px;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:9999;border:1px solid rgba(255,214,0,0.3);white-space:nowrap;}
+  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);color:white;padding:10px 22px;border-radius:20px;font-size:14px;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:9999;border:1px solid rgba(255,214,0,0.4);white-space:nowrap;}
   #toast.show{opacity:1;}
+
+  /* ADAPTACIÓN A PANTALLAS MÓVILES */
+  @media (max-width: 900px) {
+    .layout-main{flex-direction:column;align-items:center;}
+    .sponsor-side{width:100%;max-width:400px;flex-direction:row;justify-content:space-around;}
+    .sponsor-box{min-height:120px;}
+    .numero{font-size:16px;}
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="hesc"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPDw8NEBAQFg8QEBAVFRAVFRUVGBUaFxUWFhUXFxYYHSggGBwmHxgXITEhJSkrLi4uFyA1ODMtNygtMCsBCgoKDg0OGhAQGy4lICUtNS0tLS8tLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAQYCBQcEA//EAEcQAAEDAgMBCQcJBQgDAAAAAAEAAgMEEQUGIRIxBxMiQVFhcYGRFzJjcpKy4RQjQkNSk6GxwTM0U4KzFRY1YnN0wvAlotH/xgAbAQEAAgMBAQAAAAAAAAAAAAAAAQUDBAYCB//EADkRAAIBAwIDBgMHAwQDAQAAAAABAgMEEQUhEjFBBhMUUWFxFiKRMjNigaGxwTRC8CNS0eElNfEV/9oADAMBADrawingbutton="badge-role" id="role-badge" onclick="toggleAdminLogin()">ESPECTADOR</div>
+  <div class="hesc"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPDw8NEBAQFg8QEBAVFRAVFRUVGBUaFxUWFhUXFxYYHSggGBwmHxgXITEhJSkrLi4uFyA1ODMtNygtMCsBCgoKDg0OGhAQGy4lICUtNS0tLS8tLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAQYCBQcEA//EAEcQAAEDAgMBCQcJBQgDAAAAAAEAAgMEEQUGIRIxBxMiQVFhcYGRFzJjcpKy4RQjQkNSk6GxwTM0U4KzFRY1YnN0wvAlotH/xgAbAQEAAgMBAQAAAAAAAAAAAAAAAQUDBAYCB//EADkRAAIBAwIDBgMHAwQDAQAAAAABAgMEEQUhEjFBBhMUUWFxFiKRMjNigaGxwTRC8CNS0eElNfEV/9oADAMBAWithSize="54x54"></div>
   <h1>BINGO CRBV</h1>
+  <div class="hesc"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxAPDw8NEBAQFg8QEBAVFRAVFRUVGBUaFxUWFhUXFxYYHSggGBwmHxgXITEhJSkrLi4uFyA1ODMtNygtMCsBCgoKDg0OGhAQGy4lICUtNS0tLS8tLy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAOEA4QMBEQACEQEDEQH/xAAbAAEAAgMBAQAAAAAAAAAAAAAAAQYCBQcEA//EAEcQAAEDAgMBCQcJBQgDAAAAAAEAAgMEEQUGIRIxBxMiQVFhcYGRFzJjcpKy4RQjQkNSk6GxwTM0U4KzFRY1YnN0wvAlotH/xgAbAQEAAgMBAQAAAAAAAAAAAAAAAQUDBAYCB//EADkRAAIBAwIDBgMHAwQDAQAAAAABAgMEEQUhEjFBBhMUUWFxFiKRMjNigaGxwTRC8CNS0eElNfEV/9oADAMBAWithSize="54x54"></div>
+  <div class="badge-role" id="role-badge" onclick="toggleAdminLogin()">ESPECTADOR</div>
 </header>
 
 <div class="sala-bar">
@@ -97,60 +114,92 @@
   <button class="btn-action btn-admin-login" id="btn-login-toggle" onclick="toggleAdminLogin()">INGRESAR COMO ADMIN</button>
 </div>
 
-<div class="contenido">
-  <div class="conn-estado">
-    <div class="sdot" id="dot-estado"></div>
-    <span id="txt-estado">Desconectado — Conéctate a una sala</span>
-  </div>
+<div class="layout-main">
 
-  <div id="offline-msg">Sin conexión en tiempo real. Los cambios no se sincronizarán hasta reconectar.</div>
-
-  <div class="num-wrap">
-    <div class="ultimo-label">ÚLTIMO NÚMERO</div>
-    <div id="numero-grande">--</div>
-    <div class="conteo"><span id="cant-cantados">0</span> / 90</div>
-  </div>
-
-  <div class="hist-wrap">
-    <div class="hist-label">ÚLTIMOS SORTEDOS</div>
-    <div class="historial" id="historial">
-      <span class="hist-empty">Esperando sorteo...</span>
+  <!-- PUBLICIDAD IZQUIERDA -->
+  <div class="sponsor-side">
+    <div class="sponsor-title">SPONSOR</div>
+    <div class="sponsor-box">
+      <svg width="140" height="140" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" fill="#E8A2C8" />
+        <text x="100" y="115" font-family="'Brush Script MT', cursive, sans-serif" font-size="55" fill="#FFFFFF" text-anchor="middle" font-style="italic">Moly</text>
+      </svg>
     </div>
   </div>
 
-  <div class="admin-panel" id="admin-panel">
-    <div class="admin-title">★ Panel de Control de Administrador ★</div>
-    <div class="admin-btns">
-      <button class="btn-del" onclick="deshacerUltimo()">Deshacer Último Número</button>
-      <button class="btn-reset" onclick="reiniciarJuego()">Reiniciar Bingo</button>
+  <!-- CONTENIDO CENTRAL DEL JUEGO -->
+  <div class="contenido">
+    <div class="conn-estado">
+      <div class="sdot" id="dot-estado"></div>
+      <span id="txt-estado">Desconectado — Conéctate a una sala</span>
+    </div>
+
+    <div id="offline-msg">Sin conexión en tiempo real. Los cambios no se sincronizarán hasta reconectar.</div>
+
+    <div class="num-wrap">
+      <div class="ultimo-label">ÚLTIMO NÚMERO</div>
+      <div id="numero-grande">--</div>
+      <div class="conteo"><span id="cant-cantados">0</span> / 90</div>
+    </div>
+
+    <div class="hist-wrap">
+      <div class="hist-label">ÚLTIMOS SORTEDOS</div>
+      <div class="historial" id="historial">
+        <span class="hist-empty">Esperando sorteo...</span>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="admin-panel">
+      <div class="admin-title">★ Panel de Control de Administrador ★</div>
+      <div class="admin-btns">
+        <button class="btn-del" onclick="deshacerUltimo()">Deshacer Último Número</button>
+        <button class="btn-reset" onclick="reiniciarJuego()">RESET / REINICIAR BINGO</button>
+      </div>
+    </div>
+
+    <!-- OPCIONES: 3 LÍNEAS Y 2 BINGOS -->
+    <div class="opciones">
+      <label><input type="checkbox" id="chk-l1" onchange="guardarEstadoAdmin()"> Línea 1</label>
+      <label><input type="checkbox" id="chk-l2" onchange="guardarEstadoAdmin()"> Línea 2</label>
+      <label><input type="checkbox" id="chk-l3" onchange="guardarEstadoAdmin()"> Línea 3</label>
+      <label><input type="checkbox" id="chk-b1" onchange="guardarEstadoAdmin()"> BINGO 1</label>
+      <label><input type="checkbox" id="chk-b2" onchange="guardarEstadoAdmin()"> BINGO 2</label>
+    </div>
+
+    <div class="tablero" id="tablero"></div>
+  </div>
+
+  <!-- PUBLICIDAD DERECHA -->
+  <div class="sponsor-side">
+    <div class="sponsor-title">SPONSOR</div>
+    <div class="sponsor-box">
+      <svg width="140" height="140" viewBox="0 0 200 200">
+        <rect width="200" height="200" rx="20" fill="#E50914" />
+        <path d="M 60 70 C 80 50, 120 50, 140 70 C 120 90, 80 90, 60 70 Z M 60 130 C 80 150, 120 150, 140 130 C 120 110, 80 110, 60 130 Z M 90 60 L 110 60 L 110 140 L 90 140 Z" fill="#FFFFFF" />
+      </svg>
     </div>
   </div>
 
-  <div class="opciones">
-    <label><input type="checkbox" id="chk-l1" onchange="guardarEstadoAdmin()"> 1ª Línea</label>
-    <label><input type="checkbox" id="chk-l2" onchange="guardarEstadoAdmin()"> 2ª Línea</label>
-    <label><input type="checkbox" id="chk-bingo" onchange="guardarEstadoAdmin()"> BINGO</label>
-  </div>
-
-  <div class="tablero" id="tablero"></div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-  const CLAVE_ADMIN = "1234"; // Clave por defecto para el administrador
+  const CLAVE_ADMIN = "1234";
   let esAdmin = false;
   let canalMQTT = null;
   let mqttClient = null;
   let salaActual = "";
 
-  // Estado del juego
+  // Estado del juego con 3 líneas y 2 bingos
   let estadoJuego = {
     numeros: [],
     ultimo: null,
     l1: false,
     l2: false,
-    bingo: false
+    l3: false,
+    b1: false,
+    b2: false
   };
 
   // Generar tablero de 1 a 90
@@ -237,7 +286,9 @@
         ultimo: null,
         l1: false,
         l2: false,
-        bingo: false
+        l3: false,
+        b1: false,
+        b2: false
       };
       publicarEstado();
     }
@@ -247,7 +298,9 @@
     if (!esAdmin) return;
     estadoJuego.l1 = document.getElementById('chk-l1').checked;
     estadoJuego.l2 = document.getElementById('chk-l2').checked;
-    estadoJuego.bingo = document.getElementById('chk-bingo').checked;
+    estadoJuego.l3 = document.getElementById('chk-l3').checked;
+    estadoJuego.b1 = document.getElementById('chk-b1').checked;
+    estadoJuego.b2 = document.getElementById('chk-b2').checked;
     publicarEstado();
   }
 
@@ -280,15 +333,17 @@
 
     // Checkboxes
     document.getElementById('chk-l1').checked = !!estadoJuego.l1;
-    document.getElementById('chk-l2').checked = !!estadoJuego.l2;
-    document.getElementById('chk-bingo').checked = !!estadoJuego.bingo;
+    document.getElementById('chk-l2').checked = !!estadoJuego.checked ? estadoJuego.l2 : !!estadoJuego.l2;
+    document.getElementById('chk-l3').checked = !!estadoJuego.l3;
+    document.getElementById('chk-b1').checked = !!estadoJuego.b1;
+    document.getElementById('chk-b2').checked = !!estadoJuego.b2;
 
-    // Historial (últimos 5)
+    // Historial
     const histEl = document.getElementById('historial');
     const ultimos = [...estadoJuego.numeros].reverse().slice(0, 6);
 
     if (ultimos.length === 0) {
-      histEl.innerHTML = '<span class="hist-empty">Esperando sorteo...</span>';
+      histEl.innerHTML = '<span class="hist-empty">Aún no salió ningún número</span>';
     } else {
       histEl.innerHTML = ultimos.map((n, i) => `
         <div class="hball ${i === 0 ? 'nuevo' : 'viejo'}">${n}</div>
@@ -306,7 +361,6 @@
 
     document.getElementById('txt-estado').textContent = "Conectando a sala: " + salaActual + "...";
 
-    // Cargar script MQTT dinámicamente si no está presente
     if (window.mqtt) {
       iniciarMQTT();
     } else {
@@ -322,7 +376,6 @@
       mqttClient.end();
     }
 
-    // Broker WebSocket MQTT público y gratuito
     mqttClient = mqtt.connect('wss://broker.emqx.io:8084/mqtt');
 
     mqttClient.on('connect', () => {
@@ -332,7 +385,6 @@
 
       mqttClient.subscribe(canalMQTT, (err) => {
         if (!err && esAdmin) {
-          // Publicar estado actual al unirse como admin
           publicarEstado();
         }
       });
@@ -353,7 +405,7 @@
     mqttClient.on('offline', () => {
       document.getElementById('dot-estado').classList.remove('on');
       document.getElementById('txt-estado').textContent = "Desconectado de la sala";
-      document.getElementById('offline-msg').classList.add('show');
+      document.getElementById('offline-msg').classList.show ? document.getElementById('offline-msg').classList.add('show') : null;
     });
   }
 
@@ -364,7 +416,6 @@
     }
   }
 
-  // Autoconectar por defecto a la sala CRBV2026
   window.onload = () => {
     actualizarModoUI();
     conectarSala();
